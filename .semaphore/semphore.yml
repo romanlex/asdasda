@@ -1,0 +1,46 @@
+---
+version: v1.0
+name: YOUR_APP_NAME
+agent:
+  machine:
+    type: e1-standard-2
+    os_image: ubuntu1804
+
+blocks:
+- name: ⏬ Install dependencies
+    task:
+      jobs:
+        - name: "\U0001F4BE Install and cache"
+          commands:
+            - checkout
+            - sem-version node 17
+            - node --version
+            - npm --version
+            - 'cache restore node-modules-$SEMAPHORE_GIT_BRANCH-$(checksum package-lock.json),node-modules-$SEMAPHORE_GIT_BRANCH,node-modules-main'
+            - npm ci
+            - cache store node-modules-$SEMAPHORE_GIT_BRANCH-$(checksum package-lock.json) node_modules
+  - name: "\U0001F50E Code linting"
+    task:
+      prologue:
+        commands:
+          - checkout --use-cache
+          - sem-version node 17
+          - node --version
+          - npm --version
+          - 'cache restore node-modules-$SEMAPHORE_GIT_BRANCH-$(checksum package-lock.json),node-modules-$SEMAPHORE_GIT_BRANCH,node-modules-main'
+      jobs:
+        - name: Eslint
+          commands:
+            - 'cache restore eslintcache-$SEMAPHORE_GIT_BRANCH,eslintcache-main'
+            - npm run lint
+            - cache delete eslintcache-$SEMAPHORE_GIT_BRANCH
+            - cache store  eslintcache-$SEMAPHORE_GIT_BRANCH client/.eslintcache
+        - name: Type checking
+          commands:
+            - npm run type-checking
+
+promotions:
+  - name: Publish docker image
+    pipeline_file: docker-release.yml
+    auto_promote:
+      when: "result = 'passed' and (branch = 'master' or tag =~ '^v')"

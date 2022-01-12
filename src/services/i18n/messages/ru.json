@@ -1,0 +1,13 @@
+{
+  "app.home.counter": "Значение счетчика",
+  "app.home.title": "Привет разработчик Фоксфорда!",
+  "app.home.themes": "Темы",
+  "app.home.themes.system.prefers": "Браузер предпочитает темную тему",
+  "app.home.themes.current": "Ваша текущая тема",
+  "app.home.themes.switch": "Сменить тему",
+  "app.home.app.options": "App Options",
+  "app.home.app.options.value": "Ваши значения",
+  "app.home.locales.title": "Локализация",
+  "app.home.locales.value": "Ваша локаль",
+  "app.home.locales.choose": "Выберите локаль"
+}

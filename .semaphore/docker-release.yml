@@ -1,0 +1,31 @@
+version: v1.0
+name: Build docker image for YOUR_APP_NAME 
+
+agent:
+  machine:
+    type: e1-standard-2
+    os_image: ubuntu1804
+
+fail_fast:
+  stop:
+    when: "branch != 'master'"
+
+blocks:
+  - name: "🛳 Docker: YOUR_APP_NAME image"
+    task:
+      secrets:
+        - name: docker-hub
+      jobs:
+        - name: ⏫ Build & Push
+          commands:
+            - checkout
+            - sem-version node 17
+            - node --version
+            - npm --version
+            - cache restore
+            - npm run build
+            - echo $DOCKER_PASSWORD | docker login --username "$DOCKER_USERNAME" --password-stdin
+            # Uncomment and update when will be ready
+            # - npm run build
+            # - docker build
+            # - docker push foxford/{YOUR_APP_NAME}:latest

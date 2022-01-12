@@ -1,0 +1,3 @@
+import '../ioc'
+
+import './routes'

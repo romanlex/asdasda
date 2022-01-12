@@ -1,0 +1,13 @@
+{
+  "app.home.counter": "Counter value",
+  "app.home.title": "Hello FoxfordDev!",
+  "app.home.themes": "Themes",
+  "app.home.themes.system.prefers": "You system prefers dark color scheme",
+  "app.home.themes.current": "You current theme",
+  "app.home.themes.switch": "Switch theme",
+  "app.home.app.options": "App Options",
+  "app.home.app.options.value": "Your app options",
+  "app.home.locales.title": "Localization",
+  "app.home.locales.value": "Your lang",
+  "app.home.locales.choose": "Choose lang"
+}

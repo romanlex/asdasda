@@ -1,0 +1,17 @@
+logs
+*.log
+npm-debug.log*
+.DS_Store
+
+cache
+node_modules
+build
+public/static
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+.eslintcache
+.idea/
+.vscode/
+.eslintcache
